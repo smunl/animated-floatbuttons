@@ -149,6 +149,7 @@ class AnimatedFloatingActionButtonState
 
   Widget _buildMainFAB() {
     return FloatingActionButton(
+      key: Key('mainFAB'),
       backgroundColor: _buttonColor.value,
       onPressed: _animateFABs,
       tooltip: widget.tooltip,
