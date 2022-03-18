@@ -121,6 +121,11 @@ class AnimatedFloatingActionButtonState
       ),
     );
 
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _onToggled();
+      }
+    });
     if (widget.openOnBuild) {
       _animateFABs();
     }
@@ -187,11 +192,7 @@ class AnimatedFloatingActionButtonState
     } else {
       _animationController.reverse();
     }
-    _animationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _onToggled();
-      }
-    });
+
     _isOpened = !_isOpened;
   }
 
