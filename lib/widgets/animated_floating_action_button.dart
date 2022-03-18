@@ -13,6 +13,7 @@ class AnimatedFloatingActionButton extends StatefulWidget {
   final String? tooltip;
   final Curve curve;
   final double spaceBetween;
+  final void Function(bool)? onToggled;
 
   /// The [fabButtons] and [animatedIconData] arguments must not be null.
   /// The [durationAnimation], [colorStartAnimation], [colorEndAnimation],
@@ -28,6 +29,7 @@ class AnimatedFloatingActionButton extends StatefulWidget {
     this.curve = Curves.easeOut,
     this.spaceBetween = -5.0,
     this.tooltip = 'toggle',
+    this.onToggled,
   })  : assert(
           durationAnimation > 150 && durationAnimation < 1250,
           'The duration of the animation should be '
@@ -169,6 +171,10 @@ class AnimatedFloatingActionButtonState
     return processButtons;
   }
 
+  void _onToggled() {
+    widget.onToggled?.call(_isOpened);
+  }
+
   void _animateFABs() {
     if (!_isOpened) {
       _animationController.forward();
@@ -176,6 +182,7 @@ class AnimatedFloatingActionButtonState
       _animationController.reverse();
     }
     _isOpened = !_isOpened;
+    _onToggled();
   }
 
   /// This method is visible from outside of this state widget throw
