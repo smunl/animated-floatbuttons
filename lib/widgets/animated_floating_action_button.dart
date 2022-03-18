@@ -187,8 +187,12 @@ class AnimatedFloatingActionButtonState
     } else {
       _animationController.reverse();
     }
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _onToggled();
+      }
+    });
     _isOpened = !_isOpened;
-    _onToggled();
   }
 
   /// This method is visible from outside of this state widget throw
