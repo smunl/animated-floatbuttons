@@ -14,6 +14,7 @@ class AnimatedFloatingActionButton extends StatefulWidget {
   final Curve curve;
   final double spaceBetween;
   final void Function(bool)? onToggled;
+  final bool openOnBuild;
 
   /// The [fabButtons] and [animatedIconData] arguments must not be null.
   /// The [durationAnimation], [colorStartAnimation], [colorEndAnimation],
@@ -29,6 +30,7 @@ class AnimatedFloatingActionButton extends StatefulWidget {
     this.curve = Curves.easeOut,
     this.spaceBetween = -5.0,
     this.tooltip = 'toggle',
+    this.openOnBuild = false,
     this.onToggled,
   })  : assert(
           durationAnimation > 150 && durationAnimation < 1250,
@@ -118,6 +120,10 @@ class AnimatedFloatingActionButtonState
         ),
       ),
     );
+
+    if (widget.openOnBuild) {
+      _animateFABs();
+    }
     super.initState();
   }
 
