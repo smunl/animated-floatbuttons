@@ -15,24 +15,26 @@ class AnimatedFloatingActionButton extends StatefulWidget {
   final double spaceBetween;
   final void Function(bool)? onToggled;
   final bool openOnBuild;
+  final Key? mainFABKey;
 
   /// The [fabButtons] and [animatedIconData] arguments must not be null.
   /// The [durationAnimation], [colorStartAnimation], [colorEndAnimation],
   /// [curve] and [spaceBetween] default to the value given by the library
   /// but also the should not be null.
-  AnimatedFloatingActionButton({
-    Key? key,
-    required this.fabButtons,
-    required this.animatedIconData,
-    this.durationAnimation = 500,
-    this.colorStartAnimation = Colors.blue,
-    this.colorEndAnimation = Colors.red,
-    this.curve = Curves.easeOut,
-    this.spaceBetween = -5.0,
-    this.tooltip = 'toggle',
-    this.openOnBuild = false,
-    this.onToggled,
-  })  : assert(
+  AnimatedFloatingActionButton(
+      {Key? key,
+      required this.fabButtons,
+      required this.animatedIconData,
+      this.durationAnimation = 500,
+      this.colorStartAnimation = Colors.blue,
+      this.colorEndAnimation = Colors.red,
+      this.curve = Curves.easeOut,
+      this.spaceBetween = -5.0,
+      this.tooltip = 'toggle',
+      this.openOnBuild = false,
+      this.onToggled,
+      this.mainFABKey})
+      : assert(
           durationAnimation > 150 && durationAnimation < 1250,
           'The duration of the animation should be '
           'greater than 150 and smaller than 12500.',
@@ -149,7 +151,7 @@ class AnimatedFloatingActionButtonState
 
   Widget _buildMainFAB() {
     return FloatingActionButton(
-      key: Key('mainFAB'),
+      key: widget.mainFABKey,
       backgroundColor: _buttonColor.value,
       onPressed: _animateFABs,
       tooltip: widget.tooltip,
